@@ -20,16 +20,19 @@ const int uPin = 9;       // Analog write pin (PWM)
 // boolean switchVal = HIGH; // declare initial switch pin state
 
 // Parameter Settings
-int time = 0;             // initialize time
+int currentTime = 0;             // initialize time
 const float uin = 2.5;    // 2.5V input
 
 // Initial Values for internal signals
 float y = 0;
+float uCurrent = 0;
 
 void setup() {
   // pinMode(switchPin, INPUT);     // set switch pin to input mode
   // digitalWrite(switchPin, HIGH); // initialize to start with pull up voltage
+  analogWrite(uPin, 0);             // Set LOW initially
   Serial.begin(9600);
+  delay(20000);                      // Allow time for CoolTerm
 }
 
 void loop() {
@@ -41,21 +44,28 @@ void loop() {
   switchVal = digitalRead(switchPin); // read switch state
   }
   */
+  if (currentTime > 10) {
+    uCurrent = uin;
+  } 
+  else {
+    uCurrent = 0;
+  }
   // WRITE CIRCUIT INPUT
-  int uVal = uin * (255/5);
+  int uVal = uCurrent * (255. / 5.0);
   analogWrite(uPin,uVal);
 
   // READ CIRCUIT OUTPUT
   int sensorVal = analogRead(yPin);
 
   // convert to volts
-  y = sensorVal * (5.0/1023.0);
+  y = sensorVal * (5.0 / 1023.0);
 
   // print the results to the serial monitor:
-  Serial.print(time++);
+  Serial.print(currentTime);
   Serial.print (" ");
   Serial.println (y);
   
+  currentTime++;                      // Increment
   // WAIT FOR NEXT SAMPLE
   delay(100); //sample frequency 10Hz
   // switchVal = digitalRead(switchPin); // read switch state
