@@ -7,8 +7,10 @@
 expdata = readmatrix('/Users/sebastianheredia/Documents/MATLAB/e102_part2_coolterm');
 %%% CHANGE PATH IF NEEDED
 
+t_raw = expdata(:, 1) / 10;  % Convert to seconds
+
 % Subtract delay to start jump at t=0
-t_exp = expdata(:, 1) / 10;  % Convert to seconds
+t_exp = t_raw - 1.1;    % Theoretical model time
 y_exp = expdata(:, 2);  % Experimental data time
 
 %% Theoretical Model
