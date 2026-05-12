@@ -11,7 +11,7 @@ t_u = simulation.yout{2}.Values.Time;
 u = simulation.yout{2}.Values.Data;
 
 % Experimental Data
-expdata = readmatrix("runitback.txt");
+expdata = readmatrix("run.txt");
 
 t_raw = expdata(:, 1)*0.1;  % Convert to seconds
 
@@ -23,13 +23,15 @@ u_exp = expdata(:, 3);  % Experimental input data
 % Plotting
 clf; clc;
 figure(1);
-plot(t_exp, u_exp, 'r-');    
+plot(t_exp, u_exp, '--', 'LineWidth', 1, 'Color', [0 0.5 0]);    
 hold on;
-plot(t_u, u);
-plot(t_exp, y_exp, 'b-');
-plot(t_y, y_sim);
+plot(t_u, u, 'r', 'LineWidth', 1);
+plot(t_exp, y_exp, '--', 'Linewidth', 1, 'Color', [1 0.5 0]);
+plot(t_y, y_sim, 'b', 'LineWidth', 1);
 grid on;
 xlabel('Time (s)', 'FontSize', 14);
 ylabel('Voltage (V)', 'FontSize', 14);
-title('Experimental vs. Simulated PI Closed-Loop Step Response (2.5V)');
+title('Experimental vs. Simulated Step Response (2.5V) (K_p = 2.34923 & K_I = 0.85505)');
 legend('Input u[n]', 'Input u_{sim}(t)', 'Output y[n]', 'Output y_{sim}(t)');
+% ylim([0 10]);
+xlim([0 10]);
