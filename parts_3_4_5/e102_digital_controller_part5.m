@@ -13,7 +13,7 @@ u = simulation.yout{2}.Values.Data;
 % Experimental Data
 expdata = readmatrix("runitback.txt");
 
-t_raw = expdata(:, 1) / 1000;  % Convert to seconds
+t_raw = expdata(:, 1)*0.1;  % Convert to seconds
 
 % Subtract delay to start jump at t=0
 t_exp = t_raw - t_raw(1);
@@ -26,7 +26,7 @@ figure(1);
 plot(t_exp, u_exp, 'r-');    
 hold on;
 plot(t_u, u);
-plot(t_exp, y_exp, 'b-', 'LineWidth', 2);
+plot(t_exp, y_exp, 'b-');
 plot(t_y, y_sim);
 grid on;
 xlabel('Time (s)', 'FontSize', 14);
