@@ -21,15 +21,29 @@ float xhat[2] = {0, 0};             // 1x2 Matrix
 float xhat_next[2] = {0, 0};        
 
 // DISCRETE: State-Space matrices. Float for precision (could use double)
+
 float Ad[2][2] = {{0.9512, 0.0442}, {0, 0.8187}};   // 2x2 Matrix
 float Bd[2] = {0.0046, 0.1813};                     // 1x2 Matrix 
 float Cd[2] = {1.0, 0.0};
 // Recall: Dd = 0
 
-// Observer parameters
-float K[2]  = {6.5014, 1.2697};      // 1x2 Matrix 
-float L[2]  = {0.6651, 2.5080};
+/*
+// For Q_100_1
+float K[2] = {6.5014, 1.2697};      // 1x2 Matrix 
+float L[2] = {0.6651, 2.5080};      // 1x2 Matrix 
 float Kr = 8.7711;
+*/
+/*
+// For Q_500_1
+float K[2] = {14.6029, 2.0664};      // 1x2 Matrix 
+float L[2] = {0.9747, 5.7467};
+float Kr = 17.6693;
+*/
+
+// For Q_10_1
+float K[2] = {1.6059, 0.6256};      // 1x2 Matrix 
+float L[2] = {0.4057, 0.2868};
+float Kr = 3.2315;
 
 /////////////// MAIN CODE ///////////////
 
@@ -89,12 +103,12 @@ void loop() {
   Serial.print (y);                   // Measured output y(t)
   Serial.print (" ");
   Serial.println (u);                 // Control effort u(t)
-  
+
+  //Serial.print (" ");
+  //Serial.println (p);     
+
   currentTime++;
-  
+  // if (currentTime == 3 * 0.1) Serial.print ("FLAG");
   // WAIT FOR NEXT SAMPLE
   delay(100); //sample frequency 10Hz = 1/0.1sec
 }
-
-
-
