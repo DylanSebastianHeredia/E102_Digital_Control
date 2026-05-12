@@ -56,7 +56,7 @@ void setup() {
 void loop() {
 
   // Allow CoolTerm to settle before logging
-  if (currentTime > 10) r = uin;     // Additional settling block, hold 0 until 10sec then send 2.5V
+  if (currentTime > 0) r = uin;     // Additional settling block, hold 0 until 10sec then send 2.5V
   else r = 0;
 
   // READ PHYSICAL CIRCUIT OUTPUT
