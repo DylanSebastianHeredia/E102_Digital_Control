@@ -10,8 +10,8 @@ expdata = readmatrix('/Users/sebastianheredia/Documents/MATLAB/e102_part2_coolte
 t_raw = expdata(:, 1) / 10;  % Convert to seconds
 
 % Subtract logging delay to start step at t=0
-t_exp = t_raw - 1.1;    % Theoretical time
-y_exp = expdata(:, 2);  % Experimental time
+t_exp = t_raw - 1.1;
+y_exp = expdata(:, 2);
 
 %% Theoretical Model
 t = linspace(0, max(t_exp), 10E2);
