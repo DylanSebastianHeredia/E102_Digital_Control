@@ -44,6 +44,8 @@ void loop() {
   switchVal = digitalRead(switchPin); // read switch state
   }
   */
+  
+  // Allow CoolTerm to settle before logging
   if (currentTime > 10) {
     uCurrent = uin;
   } 
