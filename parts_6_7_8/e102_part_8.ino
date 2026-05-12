@@ -17,17 +17,17 @@ const float uin = 2.5;    // 2.5V input
 float y = 0;
 float u = 0;
 float r = 0; 
-float xhat[2] = {0, 0};         // 1x2 Matrix 
-float xhat_next[2] = {0, 0};    // 1x2 Matrix
+float xhat[2] = {0, 0};             // 1x2 Matrix 
+float xhat_next[2] = {0, 0};        
 
 // DISCRETE: State-Space matrices. Float for precision (could use double)
 float Ad[2][2] = {{0.9512, 0.0442}, {0, 0.8187}};   // 2x2 Matrix
-float Bd[2] = {0.0046, 0.1813}; 
+float Bd[2] = {0.0046, 0.1813};                     // 1x2 Matrix 
 float Cd[2] = {1.0, 0.0};
 // Recall: Dd = 0
 
 // Observer parameters
-float K[2]  = {6.5014, 1.2697};
+float K[2]  = {6.5014, 1.2697};      // 1x2 Matrix 
 float L[2]  = {0.6651, 2.5080};
 float Kr = 8.7711;
 
@@ -42,14 +42,10 @@ void setup() {
 void loop() {
 
   // Allow CoolTerm to settle before logging
-  if (currentTime > 10) u = uin;
+  if (currentTime > 10) u = uin;     // Additional settling block, hold 0 until 10sec then send 2.5V
   else u = 0;
 
-  // WRITE CIRCUIT INPUT
-  int uVal = u * (255.0 / 5.0);       // For VDD = 5V
-  analogWrite(uPin, uVal);            // (Pin, Duty Cycle % from 0-255)
-
-  // READ CIRCUIT OUTPUT
+  // READ PHYSICAL CIRCUIT OUTPUT
   int sensorVal = analogRead(yPin);
   y = sensorVal * (5.0 / 1023.0);    // Convert to volts
 
@@ -82,6 +78,10 @@ void loop() {
   
   // Note: Plant is accounted for in the physical circuit
   // The state space plant in the simulation is representative of the physical circuit 
+
+  // WRITE CIRCUIT INPUT
+  int uVal = u * (255.0 / 5.0);       // For VDD = 5V
+  analogWrite(uPin, uVal);            // (Pin, Duty Cycle % from 0-255)
 
   // print the results to the serial monitor:
   Serial.print(currentTime * 0.1);    // Time [sec]
