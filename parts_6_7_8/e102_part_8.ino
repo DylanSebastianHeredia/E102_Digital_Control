@@ -42,8 +42,8 @@ void setup() {
 void loop() {
 
   // Allow CoolTerm to settle before logging
-  if (currentTime > 10) u = uin;     // Additional settling block, hold 0 until 10sec then send 2.5V
-  else u = 0;
+  if (currentTime > 10) r = uin;     // Additional settling block, hold 0 until 10sec then send 2.5V
+  else r = 0;
 
   // READ PHYSICAL CIRCUIT OUTPUT
   int sensorVal = analogRead(yPin);
@@ -68,7 +68,7 @@ void loop() {
 
   /////////////// FULL SYSTEM ///////////////
   // Control Input. Recall: u[n] = (Kr*r) - (K*xhat)
-  u = (Kr * r) - (K[0] * xhat[0] + K[1] * xhat[1]);
+  u = (Kr*r) - (K[0]*xhat[0] + K[1]*xhat[1]);
 
   // Note: Zero-order hold is accounted for by sampling time! delay(100) = 0.1sec
 
