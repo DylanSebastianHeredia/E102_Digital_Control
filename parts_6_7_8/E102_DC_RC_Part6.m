@@ -51,18 +51,19 @@ L = place(Ad', Cd', poles_obsv)'
 %%% PART 7 %%%
 
 % Define ref observer step input
-%r = 2.5;       % 2.5V step input r[n]
-%time = 10;     % 10-second run-time
+% 2.5V step input r[n]
+% 10-second run-time, 0.1sec DT inc
 
 % Simulation ouput
 simulation = sim('e102_digital_control_part7.slx');
 
-t_y = simulation.yout{1}.Values.Time; % Get time specific to y
-y   = simulation.yout{1}.Values.Data;
+t_y = simulation.yout{1}.Values.Time; % y time (output)
+y = simulation.yout{1}.Values.Data;
 
-t_u = simulation.yout{2}.Values.Time; % Get time specific to u
-u   = simulation.yout{2}.Values.Data;
+t_u = simulation.yout{2}.Values.Time; % u time (control effort)
+u = simulation.yout{2}.Values.Data;
 
+% Plotting
 clf;
 figure(1);
 
