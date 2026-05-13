@@ -19,8 +19,8 @@ legend('Output y(t)', 'Input u(t)');
 hold off;
 
 % Verifying the phase margin and crossover frequency
-Kp = 2.35;
-Ki = 0.86;
+Kp = 2.34923;
+Ki = 0.85505;
 s = tf('s');
 C = Kp + Ki/s;
 G = 1/(s^2 + 2.5*s +1);
