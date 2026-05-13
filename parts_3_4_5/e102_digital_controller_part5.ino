@@ -16,8 +16,8 @@ boolean switchVal = HIGH;    // declare initial switch pin state
 // Parameter Settings 
 int time = 0;  // initialize time 
 int uVal = 0;  // initialize control input 
-const float Kp = 2.34923; 
-const float Ki = 0.85505;
+const float Kp = 2.349232; 
+const float Ki = 0.855050;
 float ref = 0; 
  
 // Initial Values for internal signals 
