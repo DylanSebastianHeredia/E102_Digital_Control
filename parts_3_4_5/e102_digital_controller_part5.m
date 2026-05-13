@@ -35,3 +35,31 @@ title('Experimental vs. Simulated Step Response (2.5V) (K_p = 2.34923 & K_I = 0.
 legend('Input u[n]', 'Input u_{sim}(t)', 'Output y[n]', 'Output y_{sim}(t)');
 % ylim([0 10]);
 xlim([0 10]);
+
+
+% Filling out the table
+target = 2.5; 
+stepTime = 0.1;
+
+% Settling Time (1%)
+% Find the last time the signal was more than 0.025V away from 2.5V (aka 1%)
+idx = find(abs(y_exp - target) > 0.01*target, 1, 'last');
+t_settle = t_exp(idx + 1) - stepTime;
+
+% Maximum Percent Overshoot (Mp)
+maxVal = max(y_exp);
+fVal = mean(y_exp(end-50:end));         % Final Value (fVal), last 50 points
+Mp = 100 * ((maxVal - fVal) / fVal);
+
+% Steady-State Error
+ess = abs(target - mean(y_exp(end-10:end)));
+
+
+uss = mean(u_exp(end-50:end)); % Average of last 50 points
+U = sum(abs(u_exp - uss));     % Summation
+
+% RESULTS:
+fprintf('t_settle: %.3f\n', t_settle)
+fprintf('Mp (percent): %.3f\n', Mp)
+fprintf('ess: %.3f\n', ess)
+fprintf('U: %.3f\n', U)
